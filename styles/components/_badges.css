@@ -1,0 +1,287 @@
+/* =============================================================================
+   MMDSS Design System - Badge Components
+   Status badges, chips, and tag variants
+   ============================================================================= */
+
+  /* Base Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 9999px;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .badge-solid { color: white; }
+
+  .badge-soft {
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .badge-outline {
+    background: white;
+    border: 1px solid currentColor;
+  }
+
+  /* =========================================================================
+     STATUS BADGES - WCAG AA Compliant
+     ========================================================================= */
+  .status-active {
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+  }
+
+  .status-pending {
+    background: #FFFBEB;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+  }
+
+  .status-inactive {
+    background: #F5F5F4;
+    color: #57534E;
+    border: 1px solid #D6D3D1;
+  }
+
+  .status-error {
+    background: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+  }
+
+  .status-info {
+    background: #EFF6FF;
+    color: #1E40AF;
+    border: 1px solid #BFDBFE;
+  }
+
+  /* Status Badge System */
+  .badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: background-color var(--duration-slow) var(--ease-out-expo),
+      color var(--duration-slow) var(--ease-out-expo),
+      border-color var(--duration-slow) var(--ease-out-expo);
+  }
+
+  .badge-status-open {
+    background: rgba(129, 140, 248, 0.15);
+    color: #3730A3;
+    border: 1px solid rgba(129, 140, 248, 0.4);
+  }
+
+  .badge-status-inprogress {
+    background: rgba(99, 102, 241, 0.15);
+    color: #312E81;
+    border: 1px solid rgba(99, 102, 241, 0.4);
+  }
+
+  .badge-status-interview {
+    background: rgba(251, 191, 36, 0.18);
+    color: #78350F;
+    border: 1px solid rgba(251, 191, 36, 0.5);
+  }
+
+  .badge-status-offer {
+    background: rgba(20, 184, 166, 0.15);
+    color: #115E59;
+    border: 1px solid rgba(20, 184, 166, 0.4);
+  }
+
+  .badge-status-placed {
+    background: rgba(16, 185, 129, 0.15);
+    color: #065F46;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+  }
+
+  .badge-status-onhold {
+    background: rgba(148, 163, 184, 0.18);
+    color: #334155;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+  }
+
+  .badge-status-closed {
+    background: rgba(168, 162, 158, 0.18);
+    color: #44403C;
+    border: 1px solid rgba(168, 162, 158, 0.4);
+  }
+
+  .badge-status-urgent {
+    background: rgba(251, 113, 133, 0.15);
+    color: #9F1239;
+    border: 1px solid rgba(251, 113, 133, 0.4);
+  }
+
+  /* Animated pulse for active statuses */
+  .badge-status-active::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: status-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
+  }
+
+  /* =========================================================================
+     ATTENTION BADGES - Color Language
+     ========================================================================= */
+  .badge-pending {
+    background: var(--pending-light);
+    color: var(--pending-foreground);
+    border: 1px solid rgba(255, 107, 53, 0.25);
+  }
+
+  .badge-pending[data-blocked="true"] {
+    animation: pending-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pending-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+    50% { box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.12); }
+  }
+
+  .badge-vip {
+    background: var(--accent-gold-light);
+    color: var(--accent-gold-foreground);
+    border: 1px solid rgba(166, 150, 36, 0.25);
+  }
+
+  .badge-error {
+    background: var(--destructive-light);
+    color: var(--destructive-foreground);
+    border: 1px solid rgba(229, 62, 62, 0.2);
+  }
+
+  .badge-success {
+    background: var(--success-light);
+    color: var(--success-foreground);
+    border: 1px solid rgba(26, 165, 90, 0.25);
+  }
+
+  .badge-success[data-animate="true"] {
+    animation: success-pop var(--duration-fast) var(--ease-spring);
+  }
+
+  @keyframes success-pop {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Badge Morph Animation */
+  .badge-morph {
+    animation: badge-morph 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes badge-morph {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* =========================================================================
+     CHIP/TAG COMPONENTS
+     ========================================================================= */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: all 150ms ease;
+  }
+
+  .chip-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .chip-primary:hover {
+    background: #E0E7FF;
+  }
+
+  .chip-success {
+    background: var(--success-light);
+    color: var(--success);
+  }
+
+  .chip-warning {
+    background: var(--warning-light);
+    color: var(--warning);
+  }
+
+  .chip-danger {
+    background: var(--destructive-light);
+    color: var(--destructive);
+  }
+
+  .chip-outline {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--foreground-muted);
+  }
+
+  .chip-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  .chip-removable {
+    padding-right: 0.375rem;
+  }
+
+  .chip-remove-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.1);
+    transition: background 150ms ease;
+  }
+
+  .chip-remove-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Live Indicator Dot */
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: livePulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+  }
+
+  @keyframes livePulse {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+  }

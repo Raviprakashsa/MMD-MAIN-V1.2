@@ -1,0 +1,57 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "dev",
+			"type": "shell",
+			"command": "npm run dev",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "lint",
+			"type": "shell",
+			"command": "npm run lint",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "typecheck",
+			"type": "shell",
+			"command": "npm run typecheck",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "db:check",
+			"type": "shell",
+			"command": "npm run db:check",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "verify:phase6",
+			"type": "shell",
+			"command": "npm run verify:phase6",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "db:backfill:embeddings",
+			"type": "shell",
+			"command": "npm run db:backfill:embeddings -- --scope=all --limit=5",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	],
+	"options": {
+		"cwd": "${workspaceFolder}"
+	}
+}

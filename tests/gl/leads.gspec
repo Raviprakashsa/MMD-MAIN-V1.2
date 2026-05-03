@@ -1,0 +1,30 @@
+# Leads Page Layout Specification
+
+@objects
+    header          h1
+    search_bar      .bg-white.p-4.rounded-2xl
+    kanban_board    .flex.h-full.gap-4.overflow-x-auto
+    column-*        .flex-shrink-0.w-80
+    lead_card       h4
+
+= Main Section =
+    header:
+        inside parent 20px top left
+
+    search_bar:
+        below header 10 to 30px
+        width > 50% of screen/width
+
+= Kanban Board =
+    kanban_board:
+        below search_bar 20px
+        height > 500px
+
+    @on desktop
+        column-1:
+            width ~ 320px
+            inside kanban_board 0px top left
+
+    @on mobile
+        column-1:
+            width 100% of screen/width

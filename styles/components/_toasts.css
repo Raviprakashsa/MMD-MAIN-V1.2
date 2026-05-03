@@ -1,0 +1,186 @@
+/* =============================================================================
+   MMDSS Design System - Toast & Notification Components
+   Toast notifications, undo toasts, and alerts
+   ============================================================================= */
+
+  /* Toast Container */
+  .toast-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+  }
+
+  /* Toast Base */
+  .toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2),
+      0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary);
+  }
+
+  .toast-success {
+    border-left-color: var(--success);
+    background: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .toast-error {
+    border-left-color: var(--destructive);
+    background: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .toast-warning {
+    border-left-color: var(--warning);
+    background: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .toast-info {
+    border-left-color: #2563EB;
+    background: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .toast-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .toast-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toast-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--foreground);
+    margin-bottom: 0.25rem;
+  }
+
+  .toast-message {
+    font-size: 0.8125rem;
+    color: var(--foreground-muted);
+  }
+
+  .toast-close {
+    flex-shrink: 0;
+    padding: 0.25rem;
+    border-radius: 6px;
+    color: var(--foreground-muted);
+    transition: all 100ms ease;
+  }
+
+  .toast-close:hover {
+    background: var(--surface-hover);
+    color: var(--foreground);
+  }
+
+  /* Toast Animations */
+  .toast-enter {
+    animation: toast-enter 300ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes toast-enter {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .toast-exit {
+    animation: toast-exit 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  @keyframes toast-exit {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+  }
+
+  /* Toast Stack Compression */
+  .toast-stack > :nth-child(2) {
+    transform: translateY(-4px) scale(0.97);
+    opacity: 0.8;
+  }
+  
+  .toast-stack > :nth-child(3) {
+    transform: translateY(-8px) scale(0.94);
+    opacity: 0.6;
+  }
+
+  /* Undo Toast */
+  .undo-toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.92);
+    color: white;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .undo-toast .undo-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: background var(--duration-fast) ease;
+  }
+
+  .undo-toast .undo-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .undo-toast .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--brand-700);
+    border-radius: 0 0 12px 12px;
+    animation: toast-progress 5s linear forwards;
+  }
+
+  @keyframes toast-progress {
+    from { width: 100%; }
+    to { width: 0%; }
+  }
+
+  /* Copy Toast Animation */
+  .copy-toast {
+    animation: copy-toast 2s var(--ease-out-expo);
+  }
+
+  @keyframes copy-toast {
+    0% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+    10% { opacity: 1; transform: translateY(0) scale(1); }
+    90% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  }
+
+  /* Copy Confirmation */
+  .copy-confirmed {
+    animation: copyConfirm 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes copyConfirm {
+    0% { transform: scale(0.8) rotate(-10deg); opacity: 0; }
+    50% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }

@@ -1,0 +1,86 @@
+[
+  {
+    "_id": "698cb088a3ea22efe5888f3a",
+    "email": "admin@magnuscopo.com",
+    "password": "$2a$12$PPRI7rjcea/XmAMP/NHx8eogrW/BXfYGgrbI.hI7JjDkuqDfRUaze",
+    "name": "Super Administrator",
+    "role": "SUPER_ADMIN",
+    "isActive": true,
+    "deletedAt": null,
+    "createdAt": "2026-02-11T16:38:32.372Z",
+    "updatedAt": "2026-03-02T10:09:21.849Z",
+    "__v": 0
+  },
+  {
+    "_id": "698cb088a3ea22efe5888f3e",
+    "email": "rashmi@magnuscopo.com",
+    "password": "$2a$12$nAtUJf8yA9PMm5pBM4R4De2xk6C4Q29MiDViA89OC28rIZ9o6DVC.",
+    "name": "Rashmi Sharma",
+    "role": "COORDINATOR",
+    "isActive": true,
+    "deletedAt": null,
+    "createdAt": "2026-02-11T16:38:32.956Z",
+    "updatedAt": "2026-03-02T10:09:21.867Z",
+    "__v": 0
+  },
+  {
+    "_id": "698cb089a3ea22efe5888f41",
+    "email": "manjunath@magnuscopo.com",
+    "password": "$2a$12$.WmrgT/yQET5Ol2ottxZF.ql37ZCj.Ehf.xaB1hJiwXKIRb8fsROy",
+    "name": "Manjunath Kumar",
+    "role": "COORDINATOR",
+    "isActive": true,
+    "deletedAt": null,
+    "createdAt": "2026-02-11T16:38:33.538Z",
+    "updatedAt": "2026-03-02T10:09:21.872Z",
+    "__v": 0
+  },
+  {
+    "_id": "698cb08aa3ea22efe5888f44",
+    "email": "priya@magnuscopo.com",
+    "password": "$2a$12$c3YxvR/HG/BXmsYBiHo0j.fhyh8RK8dCxudAkgH7Mji.7R9pfnLGi",
+    "name": "Priya Patel",
+    "role": "RECRUITER",
+    "isActive": true,
+    "deletedAt": null,
+    "createdAt": "2026-02-11T16:38:34.114Z",
+    "updatedAt": "2026-03-02T10:09:21.875Z",
+    "__v": 0
+  },
+  {
+    "_id": "698cb08aa3ea22efe5888f47",
+    "email": "rahul@magnuscopo.com",
+    "password": "$2a$12$XyDb6dwTqxaksP9vLeQMvOE6fp92IAW2eRqgMKEsZKueh0cVRqZjG",
+    "name": "Rahul Singh",
+    "role": "RECRUITER",
+    "isActive": true,
+    "deletedAt": null,
+    "createdAt": "2026-02-11T16:38:34.691Z",
+    "updatedAt": "2026-03-02T10:09:21.878Z",
+    "__v": 0
+  },
+  {
+    "_id": "698cb08ba3ea22efe5888f4a",
+    "email": "scraper@magnuscopo.com",
+    "password": "$2a$12$dPdVpdteW04dTWEb0VWoUuhg6gPUPtkh8zpASFlh.342yAvzEBOD2",
+    "name": "Data Scraper",
+    "role": "SCRAPER",
+    "isActive": true,
+    "deletedAt": null,
+    "createdAt": "2026-02-11T16:38:35.321Z",
+    "updatedAt": "2026-03-02T10:09:21.879Z",
+    "__v": 0
+  },
+  {
+    "_id": "699954c02200690401d57ada",
+    "email": "admin_limited@magnuscopo.com",
+    "__v": 0,
+    "createdAt": "2026-02-21T06:46:24.584Z",
+    "deletedAt": null,
+    "isActive": true,
+    "name": "Limited Administrator",
+    "password": "$2a$12$OXAaMMplzfO3rEuKZT.czOUvVaXQVvhy2h3TAmDUvUAaEQpZCXwLm",
+    "role": "ADMIN",
+    "updatedAt": "2026-03-02T10:09:21.863Z"
+  }
+]

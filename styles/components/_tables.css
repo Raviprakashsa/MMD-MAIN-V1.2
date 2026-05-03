@@ -1,0 +1,242 @@
+/* =============================================================================
+   MMDSS Design System - Table Components
+   Data tables and row styles
+   ============================================================================= */
+
+  /* Table Card Container */
+  .table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .table-head {
+    background: var(--background-secondary);
+    color: var(--foreground-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .table-row {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    transition: background-color var(--duration-fast) var(--ease-out-expo), 
+                border-color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .table-row:hover {
+    background: var(--surface-hover);
+  }
+
+  .table-row[data-selected='true'] {
+    background: var(--primary-light);
+    border-left: 3px solid var(--primary);
+  }
+
+  /* Modern Table */
+  .table-modern {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .table-modern th {
+    text-align: left;
+    padding: 0.875rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--foreground-muted);
+    background: var(--surface-hover);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table-modern th:first-child {
+    border-top-left-radius: 12px;
+  }
+
+  .table-modern th:last-child {
+    border-top-right-radius: 12px;
+  }
+
+  .table-modern td {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: var(--foreground);
+    background: white;
+    border-bottom: 1px solid var(--border);
+    transition: background 100ms ease;
+  }
+
+  .table-modern tbody tr:hover td {
+    background: var(--surface-hover);
+  }
+
+  .table-modern tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+  }
+
+  .table-modern tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+  }
+
+  /* Premium Table */
+  .table-premium {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+  }
+
+  .table-premium thead {
+    background: linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%);
+  }
+
+  .table-premium th {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--foreground-muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table-premium td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+    font-size: 0.875rem;
+    color: var(--foreground);
+  }
+
+  .table-premium tbody tr {
+    position: relative;
+    transition: background-color 150ms ease;
+  }
+
+  .table-premium tbody tr::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  .table-premium tbody tr:hover {
+    background: rgba(99, 102, 241, 0.02);
+  }
+
+  .table-premium tbody tr:hover::before {
+    opacity: 1;
+  }
+
+  .table-premium tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Interactive Row */
+  .table-row-interactive {
+    position: relative;
+    transition: background-color var(--duration-fast) var(--ease-out-expo),
+      border-color var(--duration-fast) var(--ease-out-expo);
+    cursor: pointer;
+  }
+
+  .table-row-interactive::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--duration-fast) var(--ease-spring);
+  }
+
+  .table-row-interactive:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+  }
+
+  .table-row-interactive:hover::before {
+    transform: scaleY(1);
+  }
+
+  /* Premium Table Row */
+  .table-row-premium {
+    transition: background-color 150ms ease, box-shadow 200ms ease;
+  }
+  
+  .table-row-premium:hover {
+    background: linear-gradient(90deg, 
+      rgba(99, 102, 241, 0.04) 0%, 
+      rgba(99, 102, 241, 0.02) 100%
+    );
+    box-shadow: inset 3px 0 0 var(--brand-500);
+  }
+
+  /* Staffing Row */
+  .staffing-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background var(--duration-fast) ease;
+  }
+
+  .staffing-row:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .staffing-row[data-selected="true"] {
+    background: var(--brand-50);
+    box-shadow: inset 3px 0 0 var(--brand-700);
+  }
+
+  /* Fixed Column Widths for Scanning */
+  .staffing-row .col-status { flex: 0 0 100px; }
+  .staffing-row .col-name { flex: 1 1 auto; min-width: 0; }
+  .staffing-row .col-owner { flex: 0 0 140px; }
+  .staffing-row .col-sla { flex: 0 0 80px; }
+  .staffing-row .col-actions { flex: 0 0 120px; }
+
+  /* Row Stagger Animation */
+  .row-stagger {
+    opacity: 0;
+    animation: row-stagger-in 150ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes row-stagger-in {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* 20ms stagger delays */
+  .row-stagger:nth-child(1) { animation-delay: 0ms; }
+  .row-stagger:nth-child(2) { animation-delay: 20ms; }
+  .row-stagger:nth-child(3) { animation-delay: 40ms; }
+  .row-stagger:nth-child(4) { animation-delay: 60ms; }
+  .row-stagger:nth-child(5) { animation-delay: 80ms; }
+  .row-stagger:nth-child(6) { animation-delay: 100ms; }
+  .row-stagger:nth-child(7) { animation-delay: 120ms; }
+  .row-stagger:nth-child(8) { animation-delay: 140ms; }
+  .row-stagger:nth-child(9) { animation-delay: 160ms; }
+  .row-stagger:nth-child(10) { animation-delay: 180ms; }

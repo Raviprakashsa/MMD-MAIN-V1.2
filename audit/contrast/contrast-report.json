@@ -1,0 +1,245 @@
+{
+  "generatedAt": "2026-03-24T07:52:09.573Z",
+  "baseUrl": "http://localhost:3010",
+  "authenticated": true,
+  "auditedRouteCount": 28,
+  "discoveredStaticRoutes": [
+    "/",
+    "/admin/privacy",
+    "/dashboard",
+    "/dashboard/activities",
+    "/dashboard/admin",
+    "/dashboard/admin/archive",
+    "/dashboard/automation/command-center",
+    "/dashboard/automation/queue-heatmap",
+    "/dashboard/candidates",
+    "/dashboard/communications",
+    "/dashboard/companies",
+    "/dashboard/insights",
+    "/dashboard/insights/reports",
+    "/dashboard/integrations",
+    "/dashboard/invoices",
+    "/dashboard/invoices/new",
+    "/dashboard/leads",
+    "/dashboard/mail",
+    "/dashboard/notifications",
+    "/dashboard/placements",
+    "/dashboard/placements/new",
+    "/dashboard/reports",
+    "/dashboard/requirements",
+    "/dashboard/templates",
+    "/dashboard/timesheet",
+    "/dashboard/users",
+    "/forbidden",
+    "/login"
+  ],
+  "skippedDynamicRoutes": [
+    "/apply/[slug]",
+    "/dashboard/candidates/[id]",
+    "/dashboard/companies/[id]",
+    "/dashboard/placements/[id]",
+    "/dashboard/placements/[id]/edit",
+    "/dashboard/requirements/[id]"
+  ],
+  "routeErrors": [],
+  "totalViolationRules": 0,
+  "totalViolationNodes": 0,
+  "routes": [
+    {
+      "route": "/",
+      "finalUrl": "http://localhost:3010/login",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/admin/privacy",
+      "finalUrl": "http://localhost:3010/admin/privacy",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard",
+      "finalUrl": "http://localhost:3010/dashboard",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/activities",
+      "finalUrl": "http://localhost:3010/dashboard/activities",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/admin",
+      "finalUrl": "http://localhost:3010/dashboard/admin",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/admin/archive",
+      "finalUrl": "http://localhost:3010/dashboard/admin/archive",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/automation/command-center",
+      "finalUrl": "http://localhost:3010/dashboard/automation/command-center",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/automation/queue-heatmap",
+      "finalUrl": "http://localhost:3010/dashboard/automation/queue-heatmap",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/candidates",
+      "finalUrl": "http://localhost:3010/dashboard/candidates",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/communications",
+      "finalUrl": "http://localhost:3010/dashboard/communications",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/companies",
+      "finalUrl": "http://localhost:3010/dashboard/companies",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/insights",
+      "finalUrl": "http://localhost:3010/dashboard/insights",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/insights/reports",
+      "finalUrl": "http://localhost:3010/dashboard/insights/reports",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/integrations",
+      "finalUrl": "http://localhost:3010/dashboard/integrations",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/invoices",
+      "finalUrl": "http://localhost:3010/dashboard/invoices",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/invoices/new",
+      "finalUrl": "http://localhost:3010/dashboard/invoices/new",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/leads",
+      "finalUrl": "http://localhost:3010/dashboard/leads",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/mail",
+      "finalUrl": "http://localhost:3010/dashboard/mail",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/notifications",
+      "finalUrl": "http://localhost:3010/dashboard/notifications",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/placements",
+      "finalUrl": "http://localhost:3010/dashboard/placements",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/placements/new",
+      "finalUrl": "http://localhost:3010/dashboard/placements/new",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/reports",
+      "finalUrl": "http://localhost:3010/dashboard/reports",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/requirements",
+      "finalUrl": "http://localhost:3010/dashboard/requirements",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/templates",
+      "finalUrl": "http://localhost:3010/dashboard/templates",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/timesheet",
+      "finalUrl": "http://localhost:3010/dashboard/timesheet",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/dashboard/users",
+      "finalUrl": "http://localhost:3010/dashboard/users",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/forbidden",
+      "finalUrl": "http://localhost:3010/forbidden",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/login",
+      "finalUrl": "http://localhost:3010/login",
+      "violationCount": 0,
+      "nodeCount": 0,
+      "violations": []
+    }
+  ]
+}

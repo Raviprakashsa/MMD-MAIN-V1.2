@@ -1,0 +1,140 @@
+{
+  "investigation_plan": [
+    "Repo architecture: Next.js App Router confirmed with (dashboard) and (auth) layouts.",
+    "Component system: Found UI primitives in components/ui; identified design drift and hardcoded Tailwind colors.",
+    "Data layer: Mongoose singleton connection; identified N+1 query patterns in Search API.",
+    "Auth: NextAuth with JWT-based RBAC; identified missing RBAC consistency in Leads module.",
+    "Static checks: Failed due to Framer Motion type mismatches and Lint path configuration errors.",
+    "Responsiveness: Evaluated AppShell and primary dashboard pages for mobile-first compliance."
+  ],
+  "findings": [
+    {
+      "id": "ENG-001",
+      "category": "Functional correctness & business logic",
+      "severity": "Critical",
+      "type": "engineering",
+      "user_pain": "Inability to deploy or run production builds.",
+      "impact": "Project is stuck in a non-buildable state.",
+      "files": ["app/(dashboard)/dashboard/_components/AdminDashboard.tsx", "package.json"],
+      "description": "Framer Motion Variant type mismatch. Types of property \"ease\" are incompatible (string vs Easing).",
+      "reproduction": "Run `npx tsc --noEmit`",
+      "suggested_fix": "Align Framer Motion types or update variants to use valid Easing unions from the library.",
+      "risk": "Minimal",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "ENG-002",
+      "category": "Client/server boundaries & hydration issues",
+      "severity": "High",
+      "type": "engineering",
+      "user_pain": "Flickering UI and potential React state errors on page load.",
+      "impact": "Degraded perceived performance and potential runtime crashes.",
+      "files": ["app/(dashboard)/dashboard/candidates/page.tsx", "app/(dashboard)/dashboard/requirements/page.tsx"],
+      "description": "Initial state uses `new Date().toISOString()`, causing hydration mismatches between server-render (UTC/Server Time) and client-hydration (Local Time).",
+      "reproduction": "Refresh Candidates or Requirements page; check console for hydration warnings.",
+      "suggested_fix": "Move date initialization to `useEffect` or use a stable static string for initial render.",
+      "risk": "Low",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "ENG-003",
+      "category": "Authentication & Authorization flows",
+      "severity": "High",
+      "type": "engineering",
+      "user_pain": "Inconsistent data visibility for different roles.",
+      "impact": "Security risk: potential data leakage or unauthorized access in the Leads module.",
+      "files": ["lib/actions/module9-leads.ts", "lib/auth/rbac.ts"],
+      "description": "The Leads module manually implements role checks instead of using the centralized `rbac.ts` utility, missing soft-delete (deletedAt) filters.",
+      "reproduction": "Audit `getLeads` function in `module9-leads.ts`.",
+      "suggested_fix": "Refactor Leads API to use centralized RBAC helper functions.",
+      "risk": "Medium",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "UX-001",
+      "category": "Consistency & design system coherence",
+      "severity": "High",
+      "type": "uiux",
+      "user_pain": "The UI feels \"unfinished\" or inconsistent due to mixed design languages.",
+      "impact": "Poor product brand perception and reduced trust.",
+      "files": ["components/ui/GlassCard.tsx", "app/globals.css", "app/(dashboard)/dashboard/leads/LeadCard.tsx"],
+      "description": "GlassCard uses hardcoded dark glass styles on a light cream theme. LeadCard uses raw Tailwind colors (e.g., emerald-600) instead of design system tokens (e.g., var(--success)).",
+      "reproduction": "Navigate to Leads Kanban board; observe color mismatches.",
+      "suggested_fix": "Standardize all color instances to use CSS variables defined in globals.css.",
+      "risk": "Low (Visual only)",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "UX-002",
+      "category": "Forms UX & validation",
+      "severity": "Medium",
+      "type": "uiux",
+      "user_pain": "Frustrating form experience; mistakes are only caught after submission.",
+      "impact": "Increased user error and slower data entry.",
+      "files": ["app/(dashboard)/dashboard/candidates/page.tsx", "app/(dashboard)/dashboard/requirements/page.tsx"],
+      "description": "Forms use manual state checks and simple alerts instead of inline validation, Zod schemas, or React Hook Form.",
+      "reproduction": "Try submitting an empty Candidate or Requirement form.",
+      "suggested_fix": "Integrate React Hook Form with the existing Zod schemas in `lib/validators/common.ts`.",
+      "risk": "Low",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "ENG-004",
+      "category": "Performance bottlenecks & caching strategy",
+      "severity": "Medium",
+      "type": "engineering",
+      "user_pain": "Global search feels laggy as database grows.",
+      "impact": "Increased database load and poor UX for power users.",
+      "files": ["app/api/search/route.ts"],
+      "description": "Search API performs sequential MongoDB queries for related Company/Requirement data (N+1 issue) and lacks text indexing.",
+      "reproduction": "Perform multiple global searches (Ctrl+K).",
+      "suggested_fix": "Use MongoDB `$lookup` or Mongoose `.populate()` and implement a text search index.",
+      "risk": "Medium",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "UX-003",
+      "category": "Accessibility (A11y) & inclusivity",
+      "severity": "Medium",
+      "type": "uiux",
+      "user_pain": "Keyboard-only users cannot reliably use the dashboard.",
+      "impact": "WCAG non-compliance; exclusion of users with motor impairments.",
+      "files": ["components/layout/TopNav.tsx", "app/(dashboard)/dashboard/candidates/page.tsx"],
+      "description": "Rating stars and dropdown triggers lack distinct focus-visible states. Modal focus traps need verification.",
+      "reproduction": "Attempt to navigate the Candidates cards using only the Tab key.",
+      "suggested_fix": "Apply \"focus-ring\" utility to all interactive elements and ensure ARIA labels are active.",
+      "risk": "Low",
+      "rollback": "Git revert"
+    },
+    {
+      "id": "ENG-005",
+      "category": "Secrets, .env safety",
+      "severity": "Medium",
+      "type": "engineering",
+      "user_pain": "N/A (Backend risk)",
+      "impact": "Potential security breach if weak secrets are used in production.",
+      "files": [".env", ".env.example"],
+      "description": ".env.example contains a weak placeholder secret \"secure-random-secret\" which might be copied literally into dev environments.",
+      "reproduction": "View `.env.example`.",
+      "suggested_fix": "Update documentation to require `openssl rand -base64 32` for the secret.",
+      "risk": "Low",
+      "rollback": "N/A"
+    }
+  ],
+  "patches": [],
+  "exec_summary": [
+    "Overall: The Magnus Copo project has a strong foundation but suffers from significant \"UI Drift\" and technical debt in build configurations.",
+    "Engineering Goal: Stabilize the build (TSC + Lint) and centralize RBAC logic to prevent data leakage.",
+    "UI/UX Goal: Finalize the Design System 2.0 implementation by replacing hardcoded Tailwind colors with semantic CSS tokens.",
+    "Performance: Optimize Search and Candidate fetching (move to server components or cache layers) to eliminate layout shifts."
+  ],
+  "commands_to_run": [
+    "npx tsc --noEmit",
+    "npm run lint",
+    "npm run db:check"
+  ],
+  "questions_for_human": [
+    "Should I proceed with fixing the TSC/Lint errors first to stabilize the build?",
+    "Confirm if the Leads module should be accessible to RECRUITERS (currently blocked by manual RBAC check)."
+  ]
+}

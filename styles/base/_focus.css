@@ -1,0 +1,47 @@
+/* =============================================================================
+   MMDSS Design System - Focus States & Accessibility
+   Accessible focus indicators and keyboard navigation
+   ============================================================================= */
+
+/* Ensure focus-visible works correctly */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Focus Ring Enhanced */
+.focus-ring-enhanced {
+  outline: none;
+  position: relative;
+  transition: outline-offset var(--duration-fast) var(--ease-out-expo);
+}
+
+.focus-ring-enhanced:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* Focus Ring Double (alternative) */
+.focus-ring-double {
+  outline: none;
+  box-shadow: 0 0 0 0 var(--background), 0 0 0 0 var(--primary);
+  transition: box-shadow var(--duration-fast) var(--ease-out-expo);
+}
+
+.focus-ring-double:focus-visible {
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+}
+
+/* Focus Ring Premium */
+.focus-ring-premium:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px var(--background),
+    0 0 0 4px rgba(0, 27, 255, 0.5);
+}

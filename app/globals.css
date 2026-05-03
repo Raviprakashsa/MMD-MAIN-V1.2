@@ -1,0 +1,134 @@
+/* =============================================================================
+   MMDSS Application Styles
+   
+   This file serves as the main entry point for the application's CSS.
+   It combines Tailwind CSS with our modular design system.
+   
+   Architecture:
+   1. Tailwind CSS directives (base, components, utilities)
+   2. Design System modules (imported inline to work with Tailwind layers)
+   3. Any app-specific overrides
+   
+   @see styles/ for the full design system structure
+   ============================================================================= */
+
+/* =============================================================================
+  DESIGN SYSTEM MODULES
+  Per CSS spec, @import must precede all other rules except @charset/@layer
+  ============================================================================= */
+
+/* Base Layer */
+@import '../styles/base/_reset.css';
+@import '../styles/base/_typography.css';
+@import '../styles/base/_focus.css';
+
+/* Tokens Layer */
+@import '../styles/tokens/_colors.css';
+@import '../styles/tokens/_spacing.css';
+@import '../styles/tokens/_shadows.css';
+@import '../styles/tokens/_motion.css';
+@import '../styles/tokens/_typography.css';
+
+/* Components Layer */
+@import '../styles/components/_buttons.css';
+@import '../styles/components/_cards.css';
+@import '../styles/components/_badges.css';
+@import '../styles/components/_forms.css';
+@import '../styles/components/_tables.css';
+@import '../styles/components/_modals.css';
+@import '../styles/components/_navigation.css';
+@import '../styles/components/_toasts.css';
+@import '../styles/components/_mission.css';
+
+/* Utilities Layer */
+@import '../styles/utilities/_animations.css';
+@import '../styles/utilities/_helpers.css';
+
+/* Tailwind CSS Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   APPLICATION-SPECIFIC OVERRIDES
+   Any truly global styles that don't fit into the design system
+   ============================================================================= */
+
+/* Smooth scrolling for the entire application */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.3) transparent;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: inherit;
+}
+
+/* Body defaults */
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  color: var(--foreground, #1e293b);
+  background: var(--background, #ffffff);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 10000;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border-focus);
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  transition: top 160ms ease;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+/* Ensure inter font loads if available */
+@supports (font-variation-settings: normal) {
+  body {
+    font-optical-sizing: auto;
+  }
+}

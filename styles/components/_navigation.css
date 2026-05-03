@@ -1,0 +1,159 @@
+/* =============================================================================
+   MMDSS Design System - Navigation Components
+   Sidebar, header, tabs, and nav items
+   ============================================================================= */
+
+  /* Navigation Item Premium */
+  .nav-item-premium {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius);
+    color: var(--foreground-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 150ms ease;
+    position: relative;
+  }
+
+  .nav-item-premium::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: var(--primary);
+    border-radius: 0 3px 3px 0;
+    transition: height 150ms ease;
+  }
+
+  .nav-item-premium:hover {
+    color: var(--foreground);
+    background: rgba(99, 102, 241, 0.04);
+  }
+
+  .nav-item-premium[aria-current="page"],
+  .nav-item-premium.active {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.08);
+    font-weight: 600;
+  }
+
+  .nav-item-premium[aria-current="page"]::before,
+  .nav-item-premium.active::before {
+    height: 24px;
+  }
+
+  .nav-item-premium svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 150ms ease;
+  }
+
+  .nav-item-premium:hover svg,
+  .nav-item-premium.active svg {
+    opacity: 1;
+  }
+
+  /* Nav Indicator Slide */
+  .nav-indicator {
+    transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                width 200ms ease;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    background: var(--surface-hover);
+    border-radius: 10px;
+  }
+
+  .tab {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground-muted);
+    transition: all 150ms ease;
+    cursor: pointer;
+  }
+
+  .tab:hover {
+    color: var(--foreground);
+  }
+
+  .tab-active {
+    background: white;
+    color: var(--foreground);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .tabs-underline {
+    display: flex;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tabs-underline .tab {
+    padding: 0.75rem 0;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    background: none;
+  }
+
+  .tabs-underline .tab-active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    box-shadow: none;
+  }
+
+  /* Dropdown Menu */
+  .dropdown-menu {
+    background: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15),
+      0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem;
+    min-width: 180px;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--foreground);
+    transition: all 100ms ease;
+    cursor: pointer;
+  }
+
+  .dropdown-item:hover {
+    background: var(--surface-hover);
+  }
+
+  .dropdown-item-danger {
+    color: var(--destructive);
+  }
+
+  .dropdown-item-danger:hover {
+    background: var(--destructive-light);
+  }
+
+  .dropdown-separator {
+    height: 1px;
+    background: var(--border);
+    margin: 0.5rem 0;
+  }

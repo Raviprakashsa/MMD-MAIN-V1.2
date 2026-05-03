@@ -1,0 +1,512 @@
+// =============================================================================
+// MMDSS Component Styles - Sass + Tailwind Hybrid Architecture
+// Premium Enterprise Polish with Neuropsychology-Optimized Interactions
+// =============================================================================
+
+// =============================================================================
+// VARIABLES & MIXINS
+// =============================================================================
+
+// Premium Bezier Curves
+$ease-premium: cubic-bezier(0.22, 0.9, 0.33, 1);
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+// Timing Scale (Micro: 120-180ms | Normal: 200-350ms | Big: 450-600ms)
+$duration-micro: 120ms;
+$duration-fast: 180ms;
+$duration-base: 220ms;
+$duration-normal: 300ms;
+$duration-slow: 450ms;
+$duration-slower: 600ms;
+
+// MagnusCopo Brand Colors
+$brand-900: #1700ae;
+$brand-700: #001bff;
+$accent-gold: #a69624;
+$accent-coral: #ff6b35;
+$success: #1aa55a;
+$danger: #e53e3e;
+
+// Mixin: Premium Card Hover Effect
+@mixin card-hover-lift {
+  transition: 
+    transform $duration-base $ease-premium,
+    box-shadow $duration-base $ease-premium;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+}
+
+// Mixin: Micro-interaction Feedback
+@mixin micro-feedback {
+  transition: 
+    transform $duration-micro $ease-spring,
+    opacity $duration-micro ease-out;
+  
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// Mixin: Focus Ring (Accessible)
+@mixin focus-ring($color: $brand-700) {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color, 0.35);
+  }
+}
+
+// Mixin: Reduced Motion Support
+@mixin respect-motion {
+  @media (prefers-reduced-motion: reduce) {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+// =============================================================================
+// MISSION CARD - Staffing Operations Core Component
+// =============================================================================
+
+.mission-card {
+  @apply bg-white rounded-2xl p-4 border border-black/5;
+  @include card-hover-lift;
+  @include focus-ring;
+  @include respect-motion;
+  
+  position: relative;
+  overflow: hidden;
+  
+  // 8px Grid System Enforcement
+  padding: 16px;
+  
+  // Status Badge - Always Top Right
+  .status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  
+  // Owner Avatar - Always Bottom Right
+  .owner-avatar {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  // Time/SLA - Always Bottom Left
+  .sla-indicator {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+  }
+  
+  // Quick Actions Container
+  .quick-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: 
+      opacity $duration-fast $ease-premium,
+      transform $duration-fast $ease-premium;
+  }
+  
+  &:hover .quick-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// =============================================================================
+// SLA PROGRESS RING - Visual Urgency Framing
+// =============================================================================
+
+.sla-ring {
+  --progress: 0;
+  --size: 36px;
+  --stroke-width: 3px;
+  
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  
+  svg {
+    transform: rotate(-90deg);
+    
+    circle {
+      fill: none;
+      stroke-width: var(--stroke-width);
+      
+      &.track {
+        stroke: rgba(0, 0, 0, 0.08);
+      }
+      
+      &.progress {
+        stroke: $success;
+        stroke-linecap: round;
+        stroke-dasharray: calc(3.14159 * (var(--size) - var(--stroke-width)));
+        stroke-dashoffset: calc(3.14159 * (var(--size) - var(--stroke-width)) * (1 - var(--progress)));
+        transition: stroke-dashoffset $duration-slow $ease-out-expo, stroke $duration-base ease;
+      }
+    }
+  }
+  
+  // Warning State (last 20% of SLA)
+  &[data-urgency="warning"] {
+    svg circle.progress {
+      stroke: #f59e0b;
+    }
+  }
+  
+  // Critical State (SLA breach imminent)
+  &[data-urgency="critical"] {
+    svg circle.progress {
+      stroke: $danger;
+    }
+    
+    // Subtle warning glow - only in last 20%
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba($danger, 0.15) 0%, transparent 70%);
+      animation: sla-warning-pulse 2s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes sla-warning-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+// =============================================================================
+// DOPAMINE MICRO-REWARDS - Subtle Success Feedback
+// =============================================================================
+
+// Success Checkmark Animation
+.success-check {
+  @include respect-motion;
+  
+  .checkmark {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: check-draw $duration-normal $ease-out-expo forwards;
+  }
+}
+
+@keyframes check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+// Stage Move Ripple Effect
+.stage-move-ripple {
+  @include respect-motion;
+  
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba($brand-700, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.5);
+    animation: ripple-expand $duration-slow $ease-out-expo forwards;
+  }
+}
+
+@keyframes ripple-expand {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+// Micro Spark Effect (for success toast)
+.micro-spark {
+  @include respect-motion;
+  
+  position: relative;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: $accent-gold;
+    opacity: 0;
+  }
+  
+  &::before {
+    top: -8px;
+    left: 30%;
+    animation: spark-float $duration-slow $ease-out-expo forwards;
+  }
+  
+  &::after {
+    top: -6px;
+    right: 25%;
+    animation: spark-float $duration-slow $ease-out-expo $duration-micro forwards;
+  }
+}
+
+@keyframes spark-float {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.5);
+  }
+}
+
+// =============================================================================
+// ATTENTION STATES - Color Language
+// =============================================================================
+
+// Coral Badge - Slow Pulse (Pending/Blocked)
+.badge-pending {
+  background: rgba($accent-coral, 0.12);
+  color: darken($accent-coral, 15%);
+  border: 1px solid rgba($accent-coral, 0.25);
+  
+  &[data-blocked="true"] {
+    animation: pending-pulse 3s ease-in-out infinite;
+  }
+}
+
+@keyframes pending-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba($accent-coral, 0); 
+  }
+  50% { 
+    box-shadow: 0 0 0 4px rgba($accent-coral, 0.15); 
+  }
+}
+
+// Gold Badge - VIP/Premium (Static, No Animation)
+.badge-vip {
+  background: rgba($accent-gold, 0.12);
+  color: darken($accent-gold, 15%);
+  border: 1px solid rgba($accent-gold, 0.25);
+}
+
+// Red Badge - Error/Failure (Static - Serious, No Animation)
+.badge-error {
+  background: rgba($danger, 0.1);
+  color: darken($danger, 10%);
+  border: 1px solid rgba($danger, 0.2);
+  // No animation - red is serious
+}
+
+// Green - Success (Quick Confirmation Pop)
+.badge-success {
+  background: rgba($success, 0.12);
+  color: darken($success, 10%);
+  border: 1px solid rgba($success, 0.25);
+  
+  &[data-animate="true"] {
+    animation: success-pop $duration-fast $ease-spring;
+  }
+}
+
+@keyframes success-pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+// =============================================================================
+// PROGRESSIVE DISCLOSURE - Expert Mode Toggle
+// =============================================================================
+
+.expandable-panel {
+  @include respect-motion;
+  
+  .panel-summary {
+    // Always visible
+    transition: margin-bottom $duration-base $ease-premium;
+  }
+  
+  .panel-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows $duration-slow $ease-premium;
+    
+    > div {
+      overflow: hidden;
+    }
+  }
+  
+  &[data-expanded="true"] {
+    .panel-details {
+      grid-template-rows: 1fr;
+    }
+  }
+}
+
+// Slide Drawer (Framer Motion enhanced)
+.slide-drawer {
+  @include respect-motion;
+  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 90vw);
+  background: white;
+  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform $duration-slower $ease-out-expo;
+  
+  &[data-open="true"] {
+    transform: translateX(0);
+  }
+}
+
+// =============================================================================
+// QUICK ACTION BUTTONS - Hick's Law Optimized (Max 3 Visible)
+// =============================================================================
+
+.quick-action-btn {
+  @apply inline-flex items-center justify-center;
+  @include micro-feedback;
+  @include focus-ring;
+  @include respect-motion;
+  
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--foreground-muted);
+  border: 1px solid transparent;
+  
+  transition: 
+    background $duration-fast ease,
+    color $duration-fast ease,
+    border-color $duration-fast ease,
+    box-shadow $duration-fast ease;
+  
+  &:hover {
+    background: rgba($brand-700, 0.08);
+    color: $brand-700;
+    border-color: rgba($brand-700, 0.15);
+  }
+  
+  // Primary Action Variant
+  &.primary {
+    background: $brand-700;
+    color: white;
+    
+    &:hover {
+      background: $brand-900;
+      box-shadow: 0 4px 12px rgba($brand-700, 0.25);
+    }
+  }
+}
+
+// More Actions Menu Trigger
+.more-actions-trigger {
+  @extend .quick-action-btn;
+  
+  &[data-open="true"] {
+    background: rgba($brand-700, 0.08);
+    color: $brand-700;
+  }
+}
+
+// =============================================================================
+// TABLE ROW - Scanning Optimized
+// =============================================================================
+
+.staffing-table-row {
+  @apply flex items-center gap-4 px-4 py-3 border-b border-black/5;
+  @include respect-motion;
+  
+  transition: background $duration-fast ease;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  // Fixed Column Alignment for Scanning
+  .col-status { flex: 0 0 100px; }
+  .col-name { flex: 1 1 auto; min-width: 0; }
+  .col-owner { flex: 0 0 140px; }
+  .col-sla { flex: 0 0 80px; }
+  .col-actions { flex: 0 0 120px; }
+  
+  // Selection State
+  &[data-selected="true"] {
+    background: rgba($brand-700, 0.06);
+    box-shadow: inset 3px 0 0 $brand-700;
+  }
+}
+
+// =============================================================================
+// UNDO TOAST - High-Trust UI Pattern
+// =============================================================================
+
+.undo-toast {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl;
+  @include respect-motion;
+  
+  background: rgba(15, 23, 42, 0.92);
+  color: white;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  
+  .undo-btn {
+    @apply px-3 py-1.5 text-sm font-semibold rounded-lg;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: background $duration-fast ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+  
+  .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: $brand-700;
+    border-radius: 0 0 12px 12px;
+    animation: toast-progress 5s linear forwards;
+  }
+}
+
+@keyframes toast-progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}

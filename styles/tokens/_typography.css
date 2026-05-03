@@ -1,0 +1,46 @@
+/* =============================================================================
+   MMDSS Design System - Typography Tokens
+   Font sizes, line heights, and letter spacing
+   ============================================================================= */
+
+:root {
+    /* Font Size Scale */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-base: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.25rem;      /* 20px */
+    --font-size-2xl: 1.5rem;      /* 24px */
+    --font-size-3xl: 1.875rem;    /* 30px */
+    --font-size-4xl: 2.25rem;     /* 36px */
+    --font-size-5xl: 3rem;        /* 48px */
+    --font-size-display: 3.25rem; /* 52px */
+    --font-size-heading: 2rem;    /* 32px */
+
+    /* Semantic font sizes */
+    --font-display: var(--font-size-display);
+    --font-title: var(--font-size-3xl);
+    --font-heading: var(--font-size-2xl);
+    --font-small: 0.8125rem;      /* 13px */
+    --font-tiny: 0.6875rem;       /* 11px */
+
+    /* Line Heights */
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    --line-tight: 1.05;
+    --line-title: 1.2;
+    --line-heading: 1.3;
+
+    /* Letter Spacing */
+    --letter-spacing-tighter: -0.03em;
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-wider: 0.04em;
+    
+    /* Semantic aliases */
+    --tracking-tight: var(--letter-spacing-tight);
+    --tracking-wider: var(--letter-spacing-wider);
+}

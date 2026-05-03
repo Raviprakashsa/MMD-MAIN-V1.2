@@ -1,0 +1,36 @@
+{
+  "css.customData": [],
+  "css.validate": true,
+  "scss.validate": true,
+  "less.validate": true,
+  
+  // Tell VS Code's CSS validator to recognize Tailwind at-rules
+  "css.lint.unknownAtRules": "ignore",
+  
+  // Tailwind CSS IntelliSense settings
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  
+  // Associate CSS files with Tailwind
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  
+  // Editor settings for CSS
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  
+  // Emmet support for Tailwind
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  }
+}

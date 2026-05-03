@@ -1,0 +1,56 @@
+/* =============================================================================
+   MMDSS Design System 2.0 - Main Entry Point
+   
+   A modular, layered CSS architecture for the Magnus Recruitment Management System
+   
+   Architecture:
+   ├── Base Layer      - Reset, typography fundamentals, focus states
+   ├── Tokens Layer    - Design tokens (colors, spacing, shadows, motion, typography)
+   ├── Components Layer - UI components (buttons, cards, badges, forms, etc.)
+   └── Utilities Layer  - Animation utilities, layout helpers
+   
+   Note: CSS layers are handled by Tailwind's @layer directive in the individual files.
+   This file simply imports all modules in the correct order.
+   
+   @author Magnus Copo Development Team
+   @version 2.0.0
+   ============================================================================= */
+
+/* =============================================================================
+   BASE LAYER
+   Reset and foundational styles
+   ============================================================================= */
+@import './base/_reset.css';
+@import './base/_typography.css';
+@import './base/_focus.css';
+
+/* =============================================================================
+   TOKENS LAYER
+   Design tokens - CSS custom properties
+   ============================================================================= */
+@import './tokens/_colors.css';
+@import './tokens/_spacing.css';
+@import './tokens/_shadows.css';
+@import './tokens/_motion.css';
+@import './tokens/_typography.css';
+
+/* =============================================================================
+   COMPONENTS LAYER
+   UI Component styles
+   ============================================================================= */
+@import './components/_buttons.css';
+@import './components/_cards.css';
+@import './components/_badges.css';
+@import './components/_forms.css';
+@import './components/_tables.css';
+@import './components/_modals.css';
+@import './components/_navigation.css';
+@import './components/_toasts.css';
+@import './components/_mission.css';
+
+/* =============================================================================
+   UTILITIES LAYER
+   Animation and helper utilities
+   ============================================================================= */
+@import './utilities/_animations.css';
+@import './utilities/_helpers.css';

@@ -1,0 +1,190 @@
+$ease-fluid: cubic-bezier(0.22, 0.9, 0.33, 1);
+$ease-enter: cubic-bezier(0.2, 0.85, 0.25, 1);
+$duration-fast: 180ms;
+$duration-base: 260ms;
+
+.ops-modern-theme {
+  --ops-surface-0: #f6f8ff;
+  --ops-surface-1: #ffffff;
+  --ops-surface-2: #eff4ff;
+  --ops-stroke: rgba(35, 66, 145, 0.12);
+  --ops-stroke-strong: rgba(35, 66, 145, 0.24);
+  --ops-text: #172554;
+  --ops-text-muted: #4b6088;
+  --ops-accent-a: #0f4cff;
+  --ops-accent-b: #00a6c7;
+  --ops-accent-c: #ff7a59;
+  --ops-highlight: #ffd166;
+  --ops-shadow-soft: 0 16px 36px -18px rgba(13, 30, 92, 0.32);
+  --ops-shadow-lift: 0 26px 50px -24px rgba(13, 30, 92, 0.38);
+  --ops-glass: linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.7));
+}
+
+.ops-modern-page {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(1200px 700px at 92% 8%, rgba(15, 76, 255, 0.11), transparent 60%),
+      radial-gradient(960px 640px at 8% 22%, rgba(0, 166, 199, 0.11), transparent 58%),
+      radial-gradient(900px 640px at 50% 100%, rgba(255, 122, 89, 0.08), transparent 64%);
+    z-index: 0;
+  }
+
+  > :not(.ops-modern-optout) {
+    position: relative;
+    z-index: 1;
+    animation: ops-fade-in $duration-base $ease-enter both;
+
+    :where(h1, h2, h3) {
+      color: var(--ops-text);
+      letter-spacing: -0.015em;
+      text-wrap: balance;
+    }
+
+    :where(p, span, small) {
+      color: var(--ops-text-muted);
+    }
+
+    :where(.rounded-xl, .rounded-2xl, .rounded-3xl) {
+      border: 1px solid var(--ops-stroke);
+      box-shadow: var(--ops-shadow-soft);
+      transition:
+        transform $duration-base $ease-fluid,
+        box-shadow $duration-base $ease-fluid,
+        border-color $duration-fast ease;
+
+      &:hover {
+        border-color: var(--ops-stroke-strong);
+        box-shadow: var(--ops-shadow-lift);
+      }
+    }
+
+    :where(.bg-white, [class*='bg-white']) {
+      background: var(--ops-glass);
+      backdrop-filter: blur(10px);
+    }
+
+    :where(button, .inline-flex[role='button']) {
+      transition:
+        transform $duration-fast $ease-fluid,
+        box-shadow $duration-fast $ease-fluid,
+        filter $duration-fast ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        filter: saturate(1.04);
+      }
+
+      &:active {
+        transform: translateY(0) scale(0.985);
+      }
+
+      &:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px rgba(255, 255, 255, 0.9),
+          0 0 0 5px rgba(15, 76, 255, 0.35);
+      }
+    }
+
+    :where(input, textarea, select) {
+      border-color: var(--ops-stroke);
+      background: rgba(255, 255, 255, 0.86);
+      transition:
+        border-color $duration-fast ease,
+        box-shadow $duration-fast ease,
+        background-color $duration-fast ease;
+
+      &:focus {
+        border-color: rgba(15, 76, 255, 0.42);
+        box-shadow: 0 0 0 4px rgba(15, 76, 255, 0.12);
+        background: #ffffff;
+      }
+    }
+
+    :where(table) {
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+
+      thead tr {
+        background: linear-gradient(180deg, rgba(15, 76, 255, 0.08), rgba(15, 76, 255, 0.03));
+      }
+
+      tbody tr {
+        transition: background-color $duration-fast ease;
+      }
+
+      tbody tr:hover {
+        background: rgba(15, 76, 255, 0.04);
+      }
+    }
+
+    :where(a:hover) {
+      text-decoration-color: rgba(15, 76, 255, 0.55);
+    }
+
+    :where([class*='shadow']) {
+      box-shadow: var(--ops-shadow-soft);
+    }
+
+    :where(.bg-gradient-to-r, .bg-gradient-to-b, .bg-gradient-to-br) {
+      background-size: 180% 180%;
+      animation: ops-gradient-pan 14s ease infinite;
+    }
+  }
+}
+
+.ops-modern-optout {
+  isolation: isolate;
+}
+
+@keyframes ops-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ops-gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ops-modern-page > :not(.ops-modern-optout) {
+    :where(.rounded-xl, .rounded-2xl, .rounded-3xl) {
+      box-shadow: 0 12px 24px -16px rgba(13, 30, 92, 0.32);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ops-modern-page > :not(.ops-modern-optout) {
+    animation: none;
+
+    :where(*, *::before, *::after) {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}

@@ -1,0 +1,148 @@
+/* =============================================================================
+   MMDSS Design System - Color Tokens
+   Core color palette and semantic color mappings
+   ============================================================================= */
+
+ :root {
+    color-scheme: light;
+
+    /* ==========================================================================
+       MAGNUS COPO DESIGN SYSTEM - Neuropsychology-Optimized Tokens
+       "Mission Control meets Apple meets Enterprise Accuracy"
+       ========================================================================== */
+
+    /* Core Backgrounds - DRAMATIC Contrast with Brand Tint */
+    --background: #d8dff2;
+    --background-secondary: #cdd6ed;
+    --background-tertiary: #c2cde8;
+    --background-brand-subtle: linear-gradient(145deg, #d8dff2 0%, #c5d0eb 40%, #e8e6f5 100%);
+
+    /* Core Foregrounds */
+    --foreground: #0f172a;
+   --foreground-muted: #3f4e67;
+   --foreground-subtle: #52627d;
+
+    /* Surfaces - High Contrast Cards */
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
+    --surface-hover: #f8fafc;
+    --surface-active: #f1f5f9;
+    --surface-glass: rgba(255, 255, 255, 0.92);
+
+    /* Borders - Visible Definition */
+    --border: rgba(100, 116, 139, 0.2);
+    --border-strong: rgba(71, 85, 105, 0.25);
+   --border-focus: #001bff;
+    --border-brand: rgba(23, 0, 174, 0.15);
+
+    /* ==========================================================================
+       MAGNUS COPO BRAND PALETTE
+       Deep Indigo (#1700ae) - Brand anchor
+       Strong Blue (#001bff) - Primary CTA
+       Gold Accent (#a69624) - Premium/VIP highlight
+       Coral (#ff6b35) - Attention/Pending (warm, not alarming)
+       ========================================================================== */
+
+    /* Brand Colors - MagnusCopo Identity */
+    --brand-900: #1700ae;
+    --brand-700: #001bff;
+    --brand-600: #2541ff;
+    --brand-500: #4f5eff;
+    --brand-400: #7a87ff;
+    --brand-300: #a5aeff;
+    --brand-200: #d0d5ff;
+    --brand-100: #eaecff;
+    --brand-50: #f5f6ff;
+
+    /* Primary = Brand Blue (Trusted Action) */
+    --primary: #001bff;
+    --primary-hover: #1700ae;
+    --primary-light: #eaecff;
+    --primary-foreground: #ffffff;
+
+    /* Accent Gold - Premium/VIP Tags */
+    --accent-gold: #a69624;
+    --accent-gold-light: #f7f5e6;
+    --accent-gold-foreground: #5c5213;
+
+    /* Accent Warm Coral - Attention/Pending/Awaiting Response */
+    --accent-warm: #ff6b35;
+    --accent-warm-light: #fff0eb;
+    --accent-warm-foreground: #9a3d1c;
+
+    /* Legacy Accent (Teal) - Keep for compatibility */
+    --accent: #14b8a6;
+    --accent-light: #ccfbf1;
+    --accent-foreground: #0f172a;
+
+    /* Semantic Colors - Clear Meaning */
+    --success: #1aa55a;
+    --success-light: #e8f8ef;
+    --success-foreground: #0d5c30;
+
+    --warning: #f59e0b;
+    --warning-light: #fffbeb;
+    --warning-foreground: #7c2d12;
+
+    --destructive: #e53e3e;
+    --destructive-light: #fef2f2;
+    --destructive-foreground: #7f1d1d;
+
+    /* Pending/Attention - Coral (distinct from warning/error) */
+    --pending: #ff6b35;
+    --pending-light: #fff0eb;
+    --pending-foreground: #9a3d1c;
+
+    --secondary: #e2e8f0;
+    --secondary-foreground: #0f172a;
+
+    --muted: #f1f5f9;
+   --muted-foreground: #52627d;
+
+    /* Neutral Greys - MagnusCopo Palette */
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #eeeeee;
+    --neutral-300: #bbbbbb;
+    --neutral-400: #aaaaaa;
+    --neutral-500: #888888;
+    --neutral-600: #666666;
+    --neutral-700: #444444;
+    --neutral-800: #222222;
+    --neutral-900: #111111;
+
+    /* Tailwind semantic tokens */
+    --card: var(--surface);
+    --card-foreground: var(--foreground);
+    --popover: var(--surface-elevated);
+    --popover-foreground: var(--foreground);
+    --input: var(--surface-elevated);
+   --ring: rgba(0, 27, 255, 0.42);
+
+    /* Chart tokens */
+    --chart-grid: rgba(148, 163, 184, 0.4);
+    --chart-success: #1aa55a;
+    --chart-secondary: #001bff;
+    --chart-pending: #ff6b35;
+    --chart-premium: #a69624;
+
+    /* ==========================================================================
+       GRADIENTS - MagnusCopo Brand Identity
+       ========================================================================== */
+    --gradient-primary: linear-gradient(135deg, #1700ae 0%, #001bff 55%, #4f5eff 100%);
+    --gradient-brand: linear-gradient(135deg, #1700ae 0%, #001bff 100%);
+    --gradient-gold: linear-gradient(135deg, #a69624 0%, #c9b82c 100%);
+    --gradient-coral: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+    --gradient-accent: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+    --gradient-success: linear-gradient(135deg, #1aa55a 0%, #34d399 100%);
+    --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    --gradient-mesh: radial-gradient(circle at 10% 20%, rgba(23, 0, 174, 0.12), transparent 40%),
+      radial-gradient(circle at 80% 0%, rgba(0, 27, 255, 0.08), transparent 35%),
+      radial-gradient(circle at 90% 80%, rgba(166, 150, 36, 0.06), transparent 40%);
+  }
+
+  /* Dark mode placeholder - future enhancement */
+  .dark {
+    color-scheme: dark;
+    /* Dark mode tokens would go here */
+ }

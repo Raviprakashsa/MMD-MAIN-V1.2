@@ -1,0 +1,398 @@
+/* =============================================================================
+   MMDSS Design System - Mission Card & Staffing Components
+   Core staffing operations components
+   ============================================================================= */
+
+  /* =========================================================================
+     MISSION CARD - Core Staffing Component
+     ========================================================================= */
+  .mission-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: 
+      transform var(--duration-base) var(--ease-premium),
+      box-shadow var(--duration-base) var(--ease-premium);
+  }
+
+  .mission-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .mission-card:active {
+    transform: translateY(-1px);
+  }
+
+  /* Fixed Position Elements for Scanning */
+  .mission-card .status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .mission-card .owner-avatar {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .mission-card .sla-indicator {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  /* Quick Actions - Reveal on Hover */
+  .mission-card .quick-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: 
+      opacity var(--duration-fast) var(--ease-premium),
+      transform var(--duration-fast) var(--ease-premium);
+  }
+
+  .mission-card:hover .quick-actions,
+  .mission-card:focus-within .quick-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* =========================================================================
+     SLA PROGRESS RING - Temporal Urgency Framing
+     ========================================================================= */
+  .sla-ring {
+    --progress: 0;
+    --size: 36px;
+    --stroke-width: 3px;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+  }
+
+  .sla-ring svg {
+    transform: rotate(-90deg);
+  }
+
+  .sla-ring .track {
+    fill: none;
+    stroke: rgba(0, 0, 0, 0.08);
+    stroke-width: var(--stroke-width);
+  }
+
+  .sla-ring .progress {
+    fill: none;
+    stroke: var(--success);
+    stroke-width: var(--stroke-width);
+    stroke-linecap: round;
+    transition: stroke-dashoffset var(--duration-slow) var(--ease-out-expo), stroke var(--duration-base) ease;
+  }
+
+  .sla-ring[data-urgency="warning"] .progress {
+    stroke: var(--warning);
+  }
+
+  .sla-ring[data-urgency="critical"] .progress {
+    stroke: var(--accent-warm);
+  }
+
+  .sla-ring[data-urgency="breached"] .progress {
+    stroke: var(--destructive);
+  }
+
+  .sla-ring[data-urgency="critical"]::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+    animation: sla-warning-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes sla-warning-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .sla-warning-ring {
+    animation: slaWarning 2.5s ease-in-out infinite;
+  }
+
+  @keyframes slaWarning {
+    0%, 100% { 
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    50% { 
+      opacity: 0.7;
+    }
+  }
+
+  /* =========================================================================
+     BENTO GRID LAYOUT
+     ========================================================================= */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4, 1rem);
+    container-type: inline-size;
+  }
+
+  .bento-col-2 {
+    grid-column: span 2;
+  }
+
+  @container (max-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bento-col-2 {
+      grid-column: span 2;
+    }
+  }
+
+  @container (max-width: 640px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bento-col-2 {
+      grid-column: span 1;
+    }
+  }
+
+  /* =========================================================================
+     TIMELINE
+     ========================================================================= */
+  .timeline {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    width: 2px;
+    background: var(--border-strong);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 1.75rem;
+    padding-bottom: 1rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -0.05rem;
+    top: 0.35rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 3px solid var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .timeline-dot.current {
+    background: var(--primary);
+    box-shadow: 0 0 0 6px rgba(79, 70, 229, 0.15);
+  }
+
+  .timeline-dot.complete {
+    background: var(--success);
+  }
+
+  .timeline-node {
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  
+  .timeline-node:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+  }
+
+  /* =========================================================================
+     PULSE INDICATOR
+     ========================================================================= */
+  .pulse-indicator {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pulse-indicator::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--chart-success);
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .pulse-indicator::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--chart-success);
+    opacity: 0.6;
+    animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.5); opacity: 0; }
+  }
+
+  /* Attention Pulse */
+  .attention-pulse {
+    animation: attentionPulse 2.8s ease-in-out infinite;
+  }
+
+  @keyframes attentionPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 107, 53, 0.12); }
+    100% { box-shadow: 0 0 0 12px rgba(255, 107, 53, 0); }
+  }
+
+  /* VIP Shimmer */
+  .vip-shimmer {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(166, 150, 36, 0.15) 50%, 
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: goldShimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes goldShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* =========================================================================
+     EXPANDABLE PANEL
+     ========================================================================= */
+  .expandable-panel .panel-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-slow) var(--ease-premium);
+  }
+
+  .expandable-panel .panel-details > div {
+    overflow: hidden;
+  }
+
+  .expandable-panel[data-expanded="true"] .panel-details {
+    grid-template-rows: 1fr;
+  }
+
+  /* =========================================================================
+     DOPAMINE MICRO-REWARDS
+     ========================================================================= */
+  .success-check .checkmark {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: check-draw var(--duration-normal) var(--ease-out-expo) forwards;
+  }
+
+  @keyframes check-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .success-tick {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    animation: successTick 400ms ease-out forwards;
+  }
+
+  @keyframes successTick {
+    0% { stroke-dashoffset: 24; opacity: 0; }
+    50% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 1; }
+  }
+
+  .stage-move-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 27, 255, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.5);
+    animation: ripple-expand var(--duration-slow) var(--ease-out-expo) forwards;
+  }
+
+  @keyframes ripple-expand {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.5); }
+  }
+
+  .micro-spark::before,
+  .micro-spark::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    opacity: 0;
+  }
+
+  .micro-spark::before {
+    top: -8px;
+    left: 30%;
+    animation: spark-float var(--duration-slow) var(--ease-out-expo) forwards;
+  }
+
+  .micro-spark::after {
+    top: -6px;
+    right: 25%;
+    animation: spark-float var(--duration-slow) var(--ease-out-expo) var(--duration-micro) forwards;
+  }
+
+  @keyframes spark-float {
+    0% { opacity: 0; transform: translateY(8px) scale(0); }
+    50% { opacity: 1; transform: translateY(-4px) scale(1); }
+    100% { opacity: 0; transform: translateY(-12px) scale(0.5); }
+  }
+
+  /* =========================================================================
+     REDUCED MOTION SUPPORT
+     ========================================================================= */
+  @media (prefers-reduced-motion: reduce) {
+    .mission-card,
+    .quick-action-btn,
+    .badge-pending,
+    .badge-success,
+    .sla-ring,
+    .success-check .checkmark,
+    .stage-move-ripple::after,
+    .micro-spark::before,
+    .micro-spark::after,
+    .expandable-panel .panel-details,
+    .slide-drawer,
+    .undo-toast .progress-bar {
+      animation: none !important;
+      transition: none !important;
+    }
+  }

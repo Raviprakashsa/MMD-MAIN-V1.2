@@ -1,0 +1,150 @@
+report({
+  "testSuite": "BackstopJS",
+  "tests": [
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\magnus_copo_vis_reg_Login_Page_0_document_0_phone.png",
+        "test": "..\\bitmaps_test\\20260203-141324\\magnus_copo_vis_reg_Login_Page_0_document_0_phone.png",
+        "selector": "document",
+        "fileName": "magnus_copo_vis_reg_Login_Page_0_document_0_phone.png",
+        "label": "Login Page",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:3000/login",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\magnus_copo_vis_reg_Login_Page_0_document_1_tablet.png",
+        "test": "..\\bitmaps_test\\20260203-141324\\magnus_copo_vis_reg_Login_Page_0_document_1_tablet.png",
+        "selector": "document",
+        "fileName": "magnus_copo_vis_reg_Login_Page_0_document_1_tablet.png",
+        "label": "Login Page",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:3000/login",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\magnus_copo_vis_reg_Login_Page_0_document_2_desktop.png",
+        "test": "..\\bitmaps_test\\20260203-141324\\magnus_copo_vis_reg_Login_Page_0_document_2_desktop.png",
+        "selector": "document",
+        "fileName": "magnus_copo_vis_reg_Login_Page_0_document_2_desktop.png",
+        "label": "Login Page",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:3000/login",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\magnus_copo_vis_reg_Leads_Page_Kanban_0_document_0_phone.png",
+        "test": "..\\bitmaps_test\\20260203-141324\\magnus_copo_vis_reg_Leads_Page_Kanban_0_document_0_phone.png",
+        "selector": "document",
+        "fileName": "magnus_copo_vis_reg_Leads_Page_Kanban_0_document_0_phone.png",
+        "label": "Leads Page (Kanban)",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:3000/dashboard/leads",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\magnus_copo_vis_reg_Leads_Page_Kanban_0_document_1_tablet.png",
+        "test": "..\\bitmaps_test\\20260203-141324\\magnus_copo_vis_reg_Leads_Page_Kanban_0_document_1_tablet.png",
+        "selector": "document",
+        "fileName": "magnus_copo_vis_reg_Leads_Page_Kanban_0_document_1_tablet.png",
+        "label": "Leads Page (Kanban)",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:3000/dashboard/leads",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\magnus_copo_vis_reg_Leads_Page_Kanban_0_document_2_desktop.png",
+        "test": "..\\bitmaps_test\\20260203-141324\\magnus_copo_vis_reg_Leads_Page_Kanban_0_document_2_desktop.png",
+        "selector": "document",
+        "fileName": "magnus_copo_vis_reg_Leads_Page_Kanban_0_document_2_desktop.png",
+        "label": "Leads Page (Kanban)",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:3000/dashboard/leads",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    }
+  ],
+  "id": "magnus_copo_vis_reg"
+});
