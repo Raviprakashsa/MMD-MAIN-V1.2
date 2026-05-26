@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import connectDB from "@/lib/db/mongodb"
-import Message, { IMessage } from "@/lib/db/models/Message"
+import Message from "@/lib/db/models/Message"
 import { getCurrentUser } from "@/lib/auth"
 import { z } from "zod"
 
@@ -33,7 +33,7 @@ export async function getAdminInbox() {
             .lean()
 
         return { success: true, data: JSON.parse(JSON.stringify(messages)) }
-    } catch (error) {
+    } catch {
         return { success: false, error: "Failed to fetch messages" }
     }
 }
@@ -48,7 +48,7 @@ export async function getUserRequests() {
             .lean()
 
         return { success: true, data: JSON.parse(JSON.stringify(messages)) }
-    } catch (error) {
+    } catch {
         return { success: false, error: "Failed to fetch requests" }
     }
 }
@@ -74,7 +74,7 @@ export async function sendAdminRequest(data: z.infer<typeof SendMessageSchema>) 
 
         revalidatePath('/dashboard/mail')
         return { success: true, data: JSON.parse(JSON.stringify(newMessage)) }
-    } catch (error) {
+    } catch {
         return { success: false, error: "Failed to send request" }
     }
 }
@@ -89,7 +89,7 @@ export async function markAsRead(messageId: string) {
         await Message.findByIdAndUpdate(messageId, { status: 'READ' })
         revalidatePath('/dashboard/mail')
         return { success: true }
-    } catch (error) {
+    } catch {
         return { success: false, error: "Failed to update status" }
     }
 }
@@ -104,7 +104,7 @@ export async function deleteMessage(messageId: string) {
         await Message.findByIdAndDelete(messageId)
         revalidatePath('/dashboard/mail')
         return { success: true }
-    } catch (error) {
+    } catch {
         return { success: false, error: "Failed to delete message" }
     }
 }

@@ -16,7 +16,7 @@ export const listNotificationsAction = createProtectedAction(
   }
 )
 
-const NotificationIdSchema = z.string() // Usually explicit object, but keeping simple for single arg if possible, otherwise object
+const _NotificationIdSchema = z.string() // Usually explicit object, but keeping simple for single arg if possible, otherwise object
 
 const IdSchema = z.object({ id: z.string().min(1) })
 

@@ -2,12 +2,11 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { getToken } from "next-auth/jwt"
 
-const AUTH_SECRET =
-    process.env.AUTH_SECRET ||
-    process.env.NEXTAUTH_SECRET ||
-    (process.env.NODE_ENV === "development"
-        ? "dev-only-secret-change-in-env"
-        : undefined)
+const AUTH_SECRET = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET
+
+if (process.env.NODE_ENV === 'production' && !AUTH_SECRET) {
+    throw new Error('NEXTAUTH_SECRET or AUTH_SECRET must be set in production')
+}
 
 const ADMIN_ONLY = [/^\/admin\//]
 const ADMIN_COORDINATOR = [/^\/coordinator\//]

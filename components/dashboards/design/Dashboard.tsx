@@ -19,29 +19,23 @@ import {
   FileText,
   Phone,
   Mail,
-  Target,
-  FileCheck,
-  UserCheck,
+  
   TrendingDown,
-  BarChart3,
-  Zap,
-  ArrowRight,
+  
   ExternalLink,
   GitBranch,
   Shield,
   X,
-  ChevronDown,
+  
   Download,
   RefreshCw,
-  Settings,
-  Search,
+  
   Eye,
   Send,
   Edit2,
-  Trash2,
   Plus,
   ChevronRight,
-  MessageSquare,
+  
   User
 } from 'lucide-react';
 import { 
@@ -54,9 +48,6 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
-  Cell,
-  PieChart,
-  Pie,
   Legend
 } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -195,7 +186,7 @@ const WORK_MODE_DATA = [
 ];
 
 // MODULE 7: Activity & Follow-up Tracking
-const ACTIVITY_BREAKDOWN = [
+const _ACTIVITY_BREAKDOWN = [
   { type: 'Calls', today: 42, week: 287 },
   { type: 'Emails', today: 28, week: 195 },
   { type: 'WhatsApp', today: 35, week: 241 },
@@ -203,7 +194,7 @@ const ACTIVITY_BREAKDOWN = [
   { type: 'Meetings', today: 6, week: 38 }
 ];
 
-const FOLLOW_UP_COMPLIANCE = {
+const _FOLLOW_UP_COMPLIANCE = {
   onTime: 156,
   overdue: 12,
   dueToday: 24,
@@ -219,7 +210,7 @@ const LEAD_PIPELINE = {
   conversionRate: 20.2
 };
 
-const LEAD_SOURCES = [
+const _LEAD_SOURCES = [
   { platform: 'LinkedIn', count: 34, confidence: 78 },
   { platform: 'Naukri', count: 22, confidence: 65 },
   { platform: 'Indeed', count: 18, confidence: 58 },
@@ -227,7 +218,7 @@ const LEAD_SOURCES = [
 ];
 
 // MODULE 10: Person-wise Productivity
-const TEAM_PRODUCTIVITY = [
+const _TEAM_PRODUCTIVITY = [
   { name: 'Rashmi', calls: 18, emails: 12, interviews: 5, hours: 7.5, compliance: 100 },
   { name: 'Manjunath', calls: 15, emails: 10, interviews: 4, hours: 7.2, compliance: 95 },
   { name: 'Amit Patel', calls: 9, emails: 6, interviews: 2, hours: 6.8, compliance: 85 }
@@ -898,7 +889,7 @@ const MiniStatCard = ({ label, value, color, icon: Icon, onClick }: any) => (
 
 export default function Dashboard({ backendData }: { backendData?: BackendDashboardData }) {
   const router = useRouter();
-  const [selectedView, setSelectedView] = useState('overview');
+  const [_selectedView, _setSelectedView] = useState('overview');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isCompanyModalOpen, setIsCompanyModalOpen] = useState(false);
   const [isRequirementsModalOpen, setIsRequirementsModalOpen] = useState(false);
@@ -1724,7 +1715,7 @@ export default function Dashboard({ backendData }: { backendData?: BackendDashbo
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
             <h3 className="text-sm font-bold text-slate-800 mb-4">Candidate Sources</h3>
             <div className="space-y-3">
-              {CANDIDATE_STATS.bySource.map((source, index) => (
+              {CANDIDATE_STATS.bySource.map((source, _index) => (
                 <div key={source.source} className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-600">{source.source}</span>
                   <span className="text-lg font-extrabold text-slate-900">{source.count}</span>

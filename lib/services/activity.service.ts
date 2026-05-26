@@ -1,6 +1,6 @@
 
 import connectDB from "@/lib/db/mongodb"
-import Activity, { ActivityType, OutcomeType } from "@/lib/db/models/Activity"
+import Activity from "@/lib/db/models/Activity"
 import Requirement from "@/lib/db/models/Requirement"
 import { AppError, ForbiddenError, NotFoundError } from "@/lib/core/app-error"
 import { serializeDoc } from "@/lib/utils/serialize"
