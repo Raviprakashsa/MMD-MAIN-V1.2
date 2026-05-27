@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "@/styles/theme-modern.scss";
+import "@/lib/sentry-init";
 import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {

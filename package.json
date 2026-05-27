@@ -25,6 +25,8 @@
                     "test:visual":  "npx backstop test",
                     "test:visual:approve":  "npx backstop approve",
                     "test:layout":  "npx galen check tests/gl/leads.gspec --url http://localhost:3000/dashboard/leads --size 1280x800"
+                    ,"migrate":"migrate-mongo up",
+                    "migrate:status":"migrate-mongo status"
                 },
     "dependencies":  {
                          "@dnd-kit/core":  "^6.3.1",
@@ -55,7 +57,8 @@
                          "sass":  "^1.97.3",
                          "tailwind-merge":  "^2.5.4",
                          "three":  "^0.182.0",
-                         "zod":  "^3.23.8"
+                                "zod":  "^3.23.8",
+                                "@sentry/node": "^8.0.0"
                      },
     "devDependencies":  {
                             "@axe-core/playwright":  "^4.11.1",
@@ -81,6 +84,7 @@
                             "ts-node":  "^10.9.2",
                             "tsx":  "^4.21.0",
                             "typescript":  "^5.6.0",
+                            "migrate-mongo": "^8.1.0",
                             "typescript-eslint":  "^8.54.0"
                         },
     "overrides":  {
