@@ -74,6 +74,28 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test --reporter=list
 
+      - name: Dump logs to console on failure
+        if: failure()
+        run: |
+          echo "========= CI: Dumping server.log (tail 500) ========="
+          if [ -f server.log ]; then
+            tail -n 500 server.log || true
+          else
+            echo "(no server.log found)"
+          fi
+          echo "========= CI: Dumping test-results files (first 200 lines each) ========="
+          if [ -d test-results ]; then
+            find test-results -type f -maxdepth 3 -print -exec sh -c 'echo "--- File: {} ---"; sed -n "1,200p" "{}"; echo ""' \;
+          else
+            echo "(no test-results directory)"
+          fi
+          echo "========= CI: Playwright report files ========="
+          if [ -d playwright-report ]; then
+            ls -R playwright-report | head -n 200 || true
+          else
+            echo "(no playwright-report directory)"
+          fi
+
       - name: Upload server.log on failure
         if: failure()
         uses: actions/upload-artifact@v4
