@@ -10,6 +10,7 @@
                     "typecheck":  "tsc --noEmit",
                     "lint":  "eslint .",
                     "lint:fix":  "eslint . --fix",
+                    "clean:ui": "eslint app components --fix || true",
                     "db:seed":  "tsx lib/db/seed.ts",
                     "db:cleanup:synthetic":  "tsx scripts/cleanup-synthetic-seed-data.ts",
                     "db:cleanup:synthetic:apply":  "tsx scripts/cleanup-synthetic-seed-data.ts --apply",
