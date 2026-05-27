@@ -32,7 +32,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies (use install to refresh lockfile when necessary)
-        run: npm install --legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       - name: Build
         run: npm run build
