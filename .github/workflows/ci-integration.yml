@@ -13,8 +13,8 @@ jobs:
       mongo:
         image: mongo:6.0
         ports: ['27017:27017']
-        options: >-
-          --health-cmd "mongosh --eval 'db.adminCommand({ ping: 1 })'" --health-interval 10s --health-timeout 5s --health-retries 5
+        # Removed strict container-level health-cmd to avoid early 'Initialize containers' failures
+        # Rely on the explicit `Wait for MongoDB` step below which uses `wait-on tcp:localhost:27017`
     env:
       DATABASE_URL: mongodb://localhost:27017/mmdss
       NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
