@@ -1,3 +1,44 @@
+CI and Integration Test Guide
+=============================
+
+Required repository secrets
+- `NEXTAUTH_SECRET` — a long random string used by NextAuth for signing/encryption.
+
+What the workflow does
+- Builds the app, starts a MongoDB service, seeds the database, starts Next.js in production mode, and runs Playwright integration tests.
+
+Recommended local steps
+On PowerShell (Windows):
+
+```powershell
+$env:NEXTAUTH_SECRET='your_local_secret'
+$env:DATABASE_URL='mongodb://localhost:27017/mmdss'
+npm ci
+npm run db:seed
+npm run build
+npm run start
+# in another shell: npx playwright test --reporter=list
+```
+
+On macOS / Linux:
+
+```bash
+export NEXTAUTH_SECRET='your_local_secret'
+export DATABASE_URL='mongodb://localhost:27017/mmdss'
+npm ci
+npm run db:seed
+npm run build
+nohup npm run start >/tmp/server.log 2>&1 &
+npx wait-on http://localhost:3000
+npx playwright test --reporter=list
+```
+
+CI notes
+- The workflow expects `NEXTAUTH_SECRET` to be set in repository secrets.
+- The workflow uses a MongoDB service container; for hosted runners, no extra setup is required.
+- `npm run db:seed` is run in CI to ensure predictable test data.
+
+If you want, I can also add a smaller workflow that only runs typechecking / linting on pull requests.
 ## CI / Build Requirements
 
 This project requires a few environment variables and steps for CI or local production builds.

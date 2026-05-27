@@ -3,7 +3,6 @@ export function initSentry(dsn?: string) {
   if (!dsn) return null
   try {
     // Dynamically require to avoid adding runtime error if package missing
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const Sentry = require('@sentry/node')
     const release = process.env.SENTRY_RELEASE || process.env.GITHUB_SHA
     const environment = process.env.NODE_ENV || 'production'
@@ -14,10 +13,10 @@ export function initSentry(dsn?: string) {
       environment,
     })
     return Sentry
-  } catch (e) {
-    // Sentry not installed; skip
-    // eslint-disable-next-line no-console
-    console.warn('Sentry not installed or failed to init, skipping')
+  } catch (err) {
+    // Sentry not installed; skip and log the error for diagnostics
+    // console usage is intentional for diagnostics during bootstrap
+    console.warn('Sentry not installed or failed to init, skipping', err)
     return null
   }
 }

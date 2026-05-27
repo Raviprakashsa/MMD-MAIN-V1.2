@@ -1,3 +1,4 @@
+/* global process,module */
 // migrate-mongo config. Uses DATABASE_URL from environment when available.
 const url = process.env.DATABASE_URL || 'mongodb://localhost:27017/mmdss'
 

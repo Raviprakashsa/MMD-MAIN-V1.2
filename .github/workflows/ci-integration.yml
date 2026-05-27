@@ -56,7 +56,48 @@ jobs:
           NEXTAUTH_SECRET: ${{ env.NEXTAUTH_SECRET }}
         run: |
           nohup npm run start > server.log 2>&1 &
-          npx wait-on http://localhost:3000 --timeout 120000
+          # wait-on is quick, but use an explicit /api/health poll as readiness gate
+          # retry up to 120s, polling every 4s
+          echo "Waiting for application health endpoint..."
+          for i in {1..30}; do
+            if curl -fsS http://localhost:3000/api/health >/dev/null 2>&1; then
+              echo "Application is healthy"
+              exit 0
+            fi
+            echo "Health check attempt $i/30 failed, retrying in 4s..."
+            sleep 4
+          done
+          echo "Application failed to become healthy after 120s. Dumping server.log (last 500 lines):"
+          tail -n 500 server.log || true
+          exit 1
 
       - name: Run Playwright tests
         run: npx playwright test --reporter=list
+
+      - name: Upload server.log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-log
+          path: server.log
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Upload test results on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+
+      - name: Upload .next on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: .next/**
