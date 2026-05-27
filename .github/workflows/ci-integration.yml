@@ -14,7 +14,7 @@ jobs:
         image: mongo:6.0
         ports: ['27017:27017']
         options: >-
-          --health-cmd "mongo --eval 'db.adminCommand(\"ping\")'" --health-interval 10s --health-timeout 5s --health-retries 5
+          --health-cmd "mongosh --eval 'db.adminCommand({ ping: 1 })'" --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       DATABASE_URL: mongodb://localhost:27017/mmdss
       NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
