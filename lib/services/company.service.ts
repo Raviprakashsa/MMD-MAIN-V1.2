@@ -16,12 +16,12 @@ const CompanyHRContactCreateSchema = HRContactSchema.extend({
     companyId: z.string().min(1),
 })
 
-const CompanyHRContactUpdateSchema = CompanyHRContactCreateSchema.partial().extend({
+const _CompanyHRContactUpdateSchema = CompanyHRContactCreateSchema.partial().extend({
     id: z.string().min(1),
 })
 
 export type CompanyHRContactCreateInput = z.infer<typeof CompanyHRContactCreateSchema>
-export type CompanyHRContactUpdateInput = z.infer<typeof CompanyHRContactUpdateSchema>
+export type CompanyHRContactUpdateInput = z.infer<typeof _CompanyHRContactUpdateSchema>
 
 // Constants
 const ALLOWED_CREATORS = ["SUPER_ADMIN", "ADMIN", "COORDINATOR", "RECRUITER"] as const

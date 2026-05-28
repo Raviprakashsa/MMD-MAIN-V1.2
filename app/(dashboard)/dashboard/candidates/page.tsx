@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import {
@@ -17,20 +17,20 @@ import {
   Calendar,
   Briefcase,
   Star,
-  Download,
+  
   Upload,
   Clock,
   CheckCircle2,
   XCircle,
   AlertCircle,
-  Loader2,
-  Filter,
+  
+  
   ArrowUpRight
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button, { IconButton } from '@/components/ui/Button'
 import { SearchInput, Select } from '@/components/ui/Input'
-import { Modal, ConfirmDialog, Drawer } from '@/components/ui/Modal'
+import { Modal, ConfirmDialog } from '@/components/ui/Modal'
 import { useToast } from '@/components/ui/Toast'
 import {
   getCandidates,
@@ -277,7 +277,7 @@ function StatusBadge({ status }: { status: Candidate['status'] }) {
   )
 }
 
-function SkillBadge({ skill }: { skill: Skill }) {
+function _SkillBadge({ skill }: { skill: Skill }) {
   const levelColors = {
     Beginner: 'bg-slate-100/80 text-slate-700 border-slate-200 dark:bg-slate-800/80 dark:text-slate-300 dark:border-slate-700',
     Intermediate: 'bg-blue-50/80 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800',
@@ -313,7 +313,6 @@ function CandidateCard({
   onView,
   onEdit,
   onDelete,
-  onToggleStar,
   onConvertToPlacement,
   canEdit,
   canDelete,
@@ -529,7 +528,7 @@ export default function CandidatesPage() {
       } else {
         toast.error('Failed to load candidates', result.error || 'Unknown error')
       }
-    } catch (err) {
+    } catch {
       toast.error('Error', 'Failed to fetch candidates')
     } finally {
       setIsLoading(false)

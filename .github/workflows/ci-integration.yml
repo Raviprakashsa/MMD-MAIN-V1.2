@@ -1,0 +1,125 @@
+name: CI - Integration Tests
+
+on:
+  push:
+    branches: [ main, master, '**/chore/**' ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:6.0
+        ports: ['27017:27017']
+        # Removed strict container-level health-cmd to avoid early 'Initialize containers' failures
+        # Rely on the explicit `Wait for MongoDB` step below which uses `wait-on tcp:localhost:27017`
+    env:
+      DATABASE_URL: mongodb://localhost:27017/mmdss
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      SENTRY_RELEASE: ${{ github.sha }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies (use install to refresh lockfile when necessary)
+        run: npm ci --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Wait for MongoDB
+        run: npx wait-on tcp:localhost:27017 --timeout 60000
+
+      - name: Run database migrations
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+        run: |
+          npm run migrate:status || true
+          npm run migrate
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Start Next.js (production)
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ env.NEXTAUTH_SECRET }}
+        run: |
+          nohup npm run start > server.log 2>&1 &
+          # wait-on is quick, but use an explicit /api/health poll as readiness gate
+          # retry up to 120s, polling every 4s
+          echo "Waiting for application health endpoint..."
+          for i in {1..30}; do
+            if curl -fsS http://localhost:3000/api/health >/dev/null 2>&1; then
+              echo "Application is healthy"
+              exit 0
+            fi
+            echo "Health check attempt $i/30 failed, retrying in 4s..."
+            sleep 4
+          done
+          echo "Application failed to become healthy after 120s. Dumping server.log (last 500 lines):"
+          tail -n 500 server.log || true
+          exit 1
+
+      - name: Run Playwright tests
+        run: npx playwright test --reporter=list
+
+      - name: Dump logs to console on failure
+        if: failure()
+        run: |
+          echo "========= CI: Dumping server.log (tail 500) ========="
+          if [ -f server.log ]; then
+            tail -n 500 server.log || true
+          else
+            echo "(no server.log found)"
+          fi
+          echo "========= CI: Dumping test-results files (first 200 lines each) ========="
+          if [ -d test-results ]; then
+            find test-results -type f -maxdepth 3 -print -exec sh -c 'echo "--- File: {} ---"; sed -n "1,200p" "{}"; echo ""' \;
+          else
+            echo "(no test-results directory)"
+          fi
+          echo "========= CI: Playwright report files ========="
+          if [ -d playwright-report ]; then
+            ls -R playwright-report | head -n 200 || true
+          else
+            echo "(no playwright-report directory)"
+          fi
+
+      - name: Upload server.log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-log
+          path: server.log
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Upload test results on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+
+      - name: Upload .next on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: .next/**

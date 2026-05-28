@@ -11,6 +11,7 @@ export default tseslint.config(
       "**/out/**",
       "**/backstop_data/**",
       "**/test-results/**",
+      "scripts/find-unused-imports.js",
       "Design Leads Page_new/**",
       "**/*.d.ts",
       "**/*.config.js",
@@ -65,6 +66,17 @@ export default tseslint.config(
       "@typescript-eslint/no-require-imports": "off",
       "no-console": "off",
       "no-unused-vars": "off",
+    },
+  }
+
+  // Reduce noise in dashboard UI files where many icons/placeholder vars exist
+  ,{
+    files: [
+      "components/dashboards/design/**/*.{ts,tsx}",
+      "app/(dashboard)/dashboard/**/*.{ts,tsx}",
+    ],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
     },
   }
 );

@@ -40,3 +40,5 @@ next-env.d.ts
 
 # prisma
 /prisma/migrations
+new_nextauth_secret.txt
+new_nextauth_secret.txt
