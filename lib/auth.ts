@@ -24,7 +24,13 @@ declare module "next-auth" {
   }
 }
 
-const AUTH_SECRET = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET
+// Use explicit secret from env, but provide a stable default for local development
+let AUTH_SECRET = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET
+
+if (!AUTH_SECRET && process.env.NODE_ENV !== 'production') {
+  // Development fallback secret (do NOT use in production)
+  AUTH_SECRET = 'nextauth_dev_fallback_secret_change_me'
+}
 
 if (process.env.NODE_ENV === 'production' && !AUTH_SECRET) {
   throw new Error('NEXTAUTH_SECRET or AUTH_SECRET must be set in production')

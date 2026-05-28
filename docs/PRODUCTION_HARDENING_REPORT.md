@@ -193,6 +193,10 @@ I will parse Playwright logs, identify failing tests, and propose fixes (flaky s
 ### Contact / Handover
 
 When you have pushed the regenerated `package-lock.json` and restored CI to `npm ci`, tell me and I will monitor the workflow run and, if necessary, parse failing Playwright logs and produce a remediation plan.
-
+nvm install 20
+nvm use 20
+npm install --legacy-peer-deps --no-audit --no-fund
+git add package-lock.json
+git commit -m "chore: regenerate package-lock.json (Node 20)"
 
 *End of report.*

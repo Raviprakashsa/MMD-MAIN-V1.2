@@ -25,6 +25,7 @@
                     "test:visual":  "npx backstop test",
                     "test:visual:approve":  "npx backstop approve",
                     "test:layout":  "npx galen check tests/gl/leads.gspec --url http://localhost:3000/dashboard/leads --size 1280x800"
+                    ,"test:role-matrix": "node scripts/role-matrix-runtime-test-v3.mjs"
                     ,"migrate":"migrate-mongo up",
                     "migrate:status":"migrate-mongo status"
                 },
